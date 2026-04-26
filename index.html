@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Universal Studio | Artist Sync & Strum</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/soundfont-player@0.12.0/dist/soundfont-player.min.js"></script>
+</head>
+<body>
+
+<div class="hud">
+    <div class="status-lcd">
+        <div id="syncType">SYSTEM READY</div>
+        <div id="dataStream">WAITING FOR ARTIST...</div>
+    </div>
+    <div class="tempo-hud">
+        <div class="bpm-display"><span id="bpmVal">120</span> <small>BPM</small></div>
+        <div class="strum-visual" id="visualizer">
+            <div class="tick"></div><div class="tick"></div><div class="tick"></div><div class="tick"></div>
+        </div>
+    </div>
+</div>
+
+<div class="console">
+    <div class="unit">
+        <label>HYBRID ARTIST SYNC</label>
+        <input type="text" id="artistInput" placeholder="Band or Singer..." oninput="smartSync()">
+    </div>
+    
+    <div class="unit">
+        <label>STRUM PATTERN (D, U, X)</label>
+        <input type="text" id="patternInput" value="D D U U D" oninput="updatePattern(this.value)">
+    </div>
+
+    <div class="unit">
+        <label>TEMPO & ENGINE</label>
+        <input type="range" min="40" max="220" value="120" oninput="updateBPM(this.value)">
+        <select id="instSelect" onchange="initAudio()" style="margin-top:10px;">
+            <option value="electric_guitar_clean">Electric Guitar</option>
+            <option value="acoustic_guitar_nylon">Acoustic Guitar</option>
+            <option value="electric_bass_finger">Electric Bass</option>
+        </select>
+    </div>
+</div>
+
+<div class="stage">
+    <div class="piano-frame" id="piano"></div>
+    <div class="hint"><b>Hold Key</b> to Loop Strum • <b>Right Click/Long Press</b> to Change Chord</div>
+</div>
+
+<div id="chordMenu" class="context-menu"></div>
+
+<script src="studio.js"></script>
+</body>
+</html>
+
